@@ -1,0 +1,9 @@
+[submodule "Mask_RCNN"]
+	path = Mask_RCNN
+	url = https://github.com/matterport/Mask_RCNN.git
+[submodule "RTSPAllTheThings"]
+	path = RTSPAllTheThings
+	url = https://github.com/Ullaakut/RTSPAllTheThings
+[submodule "deep_sort"]
+	path = deep_sort
+	url = https://github.com/nwojke/deep_sort
