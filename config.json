@@ -1,0 +1,10 @@
+{
+  "source": {
+    "uri": "rtsp://0.0.0.0:8554/live.sdp"
+  },
+  "event_handlers": [{
+      "module": "event_handlers.stdout",
+      "name": "Handler"
+    }
+  ]
+}
