@@ -1,9 +1,10 @@
 Prerequisite:
 1. Setup and configure tensorflow environment
-2. Get repository submodules and install MaskRCNN with command `pip install .`
-3. create `workspace/pretrained` folder to keep MaskRCNN and DeepSORT pretrained models
-4. Download pretrained MaskRCNN model to `workspace/pretrained/model.h5` following instructions from https://github.com/matterport/Mask_RCNN
-5. Download pretrained DeepSORT model to `workspace/pretrained/mars-small128.pb` following instructions from https://github.com/nwojke/deep_sort
+2. Get repository submodules and install MaskRCNN with command `pip install .` from MaskRCNN root dir
+3. Install DeepSORT with command `pip install .` from DeepSORT root dir
+4. create `workspace/pretrained` folder to keep MaskRCNN and DeepSORT pretrained models
+5. Download pretrained MaskRCNN model to `workspace/pretrained/model.h5` following instructions from https://github.com/matterport/Mask_RCNN
+6. Download pretrained DeepSORT model to `workspace/pretrained/mars-small128.pb` following instructions from https://github.com/nwojke/deep_sort
 
 How to run:
 1. Run docker container with RTSP server:
