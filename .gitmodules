@@ -6,4 +6,4 @@
 	url = https://github.com/Ullaakut/RTSPAllTheThings
 [submodule "deep_sort"]
 	path = deep_sort
-	url = https://github.com/nwojke/deep_sort
+	url = git@github.com:AlexanderSoroka/deep_sort.git 

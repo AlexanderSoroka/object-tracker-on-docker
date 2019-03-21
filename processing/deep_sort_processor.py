@@ -5,10 +5,10 @@ Performs object tracking using DeepSORT algorithm
 __author__ = "Alexander Soroka, soroka.a.m@gmail.com"
 
 import numpy as np
-from deep_sort.deep_sort import nn_matching
-from deep_sort.deep_sort.iou_matching import iou
-from deep_sort.deep_sort.detection import Detection
-from deep_sort.deep_sort.tracker import Tracker
+from deep_sort import nn_matching
+from deep_sort.iou_matching import iou
+from deep_sort.detection import Detection
+from deep_sort.tracker import Tracker
 from deep_sort.tools.generate_detections import create_box_encoder
 
 
