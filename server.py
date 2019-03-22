@@ -14,6 +14,7 @@ from data_source.rtsp_source import RTSPSource
 from event_handlers.event_handler_factory import EventHandlerFactory
 from event_handlers.timer_event import TimerEvent
 from processing.event_generator import EventGenerator
+from processing.historical_tracks_processor import HistoricalTracksProcessor
 from processing.mask_rcnn_processor import MaskRCNNProcessor
 from processing.deep_sort_processor import DeepSORTProcessor
 from processing.car_filter_processor import CarFilterProcessor
@@ -30,6 +31,7 @@ class Server:
         self.__car_filter = CarFilterProcessor(confidence=0.7)
         self.__processor = MaskRCNNProcessor()
         self.__tracker = DeepSORTProcessor()
+        self.__historical_tracks = HistoricalTracksProcessor()
         self.__event_generator = EventGenerator()
         self.__visualizer = None
 
@@ -45,6 +47,7 @@ class Server:
         frame = self.__processor.process_next_frame(frame)
         proposals = self.__car_filter.process_next_frame(frame)
         proposals = self.__tracker.process_next_frame(proposals)
+        tracks = self.__historical_tracks.process_next_frame(proposals)
         events = self.__event_generator.process_next_frame(proposals)
         events.append(timer.evaluate())
         return events
