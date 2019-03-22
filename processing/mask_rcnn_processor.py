@@ -4,8 +4,9 @@ Implement object detection and tracking
 
 __author__ = "Alexander Soroka, soroka.a.m@gmail.com"
 
+import numpy as np
 from mrcnn.config import Config
-from mrcnn import model as modellib, utils
+from mrcnn import model as modellib
 
 
 class MaskRCNNConfig(Config):
@@ -48,4 +49,6 @@ class MaskRCNNProcessor:
         :return: array-like detections list
         """
         frame['detections'] = self.__model.detect([frame['image']], verbose=0)[0]
+        del(frame['detections']['masks'])
+        frame['detections']['ids'] = np.array([0 for _ in frame['detections']['rois']], dtype=int)
         return frame

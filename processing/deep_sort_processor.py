@@ -30,13 +30,15 @@ class DeepSORTProcessor:
     def process_next_frame(self, frame):
         """
         Track objects from specified detections
-        :param detections: frame data + list of detections, map-like object with mandatory keys: image, detections
+        :param frame: frame data + list of detections, map-like object with mandatory keys: image, detections
         :return: detections populated with object ids
         """
+        if len(frame['detections']['rois']) == 0:
+            return frame
+
         frame['detections']['rois'][:, 2] -= frame['detections']['rois'][:, 0]
         frame['detections']['rois'][:, 3] -= frame['detections']['rois'][:, 1]
         frame['detections']['features'] = self.__feature_extractor(frame['image'], frame['detections']['rois'])
-        frame['detections']['ids'] = [None for d in frame['detections']['rois']]
 
         self.__tracker.predict()
         self.__tracker.update([

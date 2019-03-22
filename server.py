@@ -16,6 +16,7 @@ from event_handlers.timer_event import TimerEvent
 from processing.event_generator import EventGenerator
 from processing.mask_rcnn_processor import MaskRCNNProcessor
 from processing.deep_sort_processor import DeepSORTProcessor
+from processing.car_filter_processor import CarFilterProcessor
 
 
 class Server:
@@ -26,9 +27,11 @@ class Server:
         self.__counter = 0
         self.__source = source
         self.__handlers = handlers
+        self.__car_filter = CarFilterProcessor(confidence=0.7)
         self.__processor = MaskRCNNProcessor()
         self.__tracker = DeepSORTProcessor()
         self.__event_generator = EventGenerator()
+        self.__visualizer = None
 
     def run(self):
         for frame in self.__source:
@@ -40,7 +43,8 @@ class Server:
         timer = TimerEvent()
         frame = {'image': frame}
         frame = self.__processor.process_next_frame(frame)
-        proposals = self.__tracker.process_next_frame(frame)
+        proposals = self.__car_filter.process_next_frame(frame)
+        proposals = self.__tracker.process_next_frame(proposals)
         events = self.__event_generator.process_next_frame(proposals)
         events.append(timer.evaluate())
         return events
