@@ -23,6 +23,9 @@ class HistoricalTracksProcessor:
 
     def process_next_frame(self, frame):
         for idx, track_id in enumerate(frame['detections']['ids']):
+            if track_id == 0:
+                continue
+
             roi = frame['detections']['rois'][idx]
             if track_id not in self.__tracks.keys():
                 self.__tracks[track_id] = {

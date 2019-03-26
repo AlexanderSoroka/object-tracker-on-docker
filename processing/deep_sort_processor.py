@@ -8,6 +8,7 @@ import numpy as np
 from deep_sort import nn_matching
 from deep_sort.iou_matching import iou
 from deep_sort.detection import Detection
+from deep_sort.track import TrackState
 from deep_sort.tracker import Tracker
 from deep_sort.tools.generate_detections import create_box_encoder
 
@@ -22,10 +23,10 @@ class DeepSORTProcessor:
         under garbage collector
         """
         self.__feature_extractor = create_box_encoder('/work/object-tracking/workspace/pretrained/mars-small128.pb')
-        self.__max_cosine_distance = 0.2
+        self.__max_cosine_distance = 0.9
         metric = nn_matching.NearestNeighborDistanceMetric(
             "cosine", self.__max_cosine_distance, None)
-        self.__tracker = Tracker(metric)
+        self.__tracker = Tracker(metric, n_init=5, max_age=100)
 
     def process_next_frame(self, frame):
         """
@@ -49,12 +50,12 @@ class DeepSORTProcessor:
             ) for idx, d in enumerate(frame['detections']['rois'])
         ])
 
-        tracked_bbox = [track.to_tlwh() for track in self.__tracker.tracks]
+        tracked_bbox = [track.to_tlwh() for track in self.__tracker.tracks if track.state == TrackState.Confirmed]
         for idx_detection, detection in enumerate(frame['detections']['rois']):
             for idx_track, track in enumerate(tracked_bbox):
                 if iou(
                         tracked_bbox[idx_track],
                         np.array(frame['detections']['rois'][idx_detection], dtype=np.float).reshape(1, 4)
-                )[0] >= 0.9:
+                )[0] >= 0.7:
                     frame['detections']['ids'][idx_detection] = self.__tracker.tracks[idx_track].track_id
         return frame
