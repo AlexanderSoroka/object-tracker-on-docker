@@ -5,6 +5,7 @@ Prerequisite:
 4. create `workspace/pretrained` folder to keep MaskRCNN and DeepSORT pretrained models
 5. Download pretrained MaskRCNN model to `workspace/pretrained/model.h5` following instructions from https://github.com/matterport/Mask_RCNN
 6. Download pretrained DeepSORT model to `workspace/pretrained/mars-small128.pb` following instructions from https://github.com/nwojke/deep_sort
+7. Build openalpr with tesseract==4.1.0-rc1 (version matters, as latest code causes segfault)
 
 How to run:
 1. Run docker container with RTSP server:
