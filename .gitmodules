@@ -6,7 +6,7 @@
 	url = https://github.com/Ullaakut/RTSPAllTheThings
 [submodule "deep_sort"]
 	path = deep_sort
-	url = git@github.com:AlexanderSoroka/deep_sort.git 
+	url = https://github.com/AlexanderSoroka/deep_sort.git
 [submodule "openalpr"]
 	path = openalpr
 	url = https://github.com/openalpr/openalpr.git
