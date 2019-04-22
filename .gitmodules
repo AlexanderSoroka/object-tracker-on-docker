@@ -9,4 +9,4 @@
 	url = https://github.com/AlexanderSoroka/deep_sort.git
 [submodule "openalpr"]
 	path = openalpr
-	url = https://github.com/openalpr/openalpr.git
+	url = https://github.com/AlexanderSoroka/openalpr.git
